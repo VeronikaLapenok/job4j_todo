@@ -13,8 +13,8 @@ import java.util.Optional;
 public class SimpleTaskService implements TaskService {
     private final TaskRepository taskRepository;
 
-    private SimpleTaskService(TaskRepository hibernateTaskRepository) {
-        this.taskRepository = hibernateTaskRepository;
+    private SimpleTaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
     }
 
     @Override
@@ -40,5 +40,15 @@ public class SimpleTaskService implements TaskService {
     @Override
     public Optional<Task> findById(int id) {
         return taskRepository.findById(id);
+    }
+
+    @Override
+    public Collection<Task> findTasksWhereDoneIsTrue() {
+        return taskRepository.findTasksWhereDoneIsTrue();
+    }
+
+    @Override
+    public Collection<Task> findTasksWhereDoneIsFalse() {
+        return taskRepository.findTasksWhereDoneIsFalse();
     }
 }

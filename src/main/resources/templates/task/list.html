@@ -12,31 +12,38 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
             integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
 
     <title>Task list</title>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Created</th>
-                    <th scope="col">Done</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="task: ${tasks}">
-                    <td th:text="${task.id}" />
-                    <td th:text="${task.title}" />
-                    <td th:text="${task.created}" />
-                    <td th:text="${task.done}" />
-                </tr>
-                </tbody>
-            </table>
+    <div class="container-fluid p-0">
+        <header th:insert="blocks/header :: header"></header>
+        <div class="container">
+            <div class="row my-4">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="task: ${tasks}">
+                        <td th:text="${task.id}" />
+                        <td><a th:text="${task.title}"
+                               th:href="@{/task/{taskId}(taskId=${task.id})}"></a></td>
+                        <td th:text="${task.created}" />
+                        <td th:text="${task.done}" />
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <footer class="text-lg-start fixed-bottom" th:insert="blocks/footer :: footer"></footer>
     </div>
 </body>
 </html>
