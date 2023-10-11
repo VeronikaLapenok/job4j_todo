@@ -16,7 +16,35 @@
 
 
     <title>New tasks (created today)</title>
-</head><body>
-
+</head>
+<body>
+<div class="container-fluid p-0">
+    <header th:insert="blocks/header :: header"></header>
+    <div class="container">
+        <div class="row">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><i class="bi bi-square"></i></th>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="task: ${tasks}">
+                    <td th:text="${task.id}" />
+                    <td><a th:text="${task.title}"
+                           th:href="@{/task/{taskId}(taskId=${task.id})}"></a></td>
+                    <td th:text="${task.created}" />
+                    <td th:text="${task.done}" />
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <footer th:insert="blocks/footer :: footer"></footer>
+</div>
 </body>
 </html>

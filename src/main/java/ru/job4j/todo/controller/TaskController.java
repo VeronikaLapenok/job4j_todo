@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.job4j.todo.model.Task;
 import ru.job4j.todo.service.TaskService;
@@ -36,10 +37,16 @@ public class TaskController {
     }
 
     @GetMapping("/create")
-    public String create(@ModelAttribute Task task, Model model) {
+    public String getCreationPage(Model model) {
+        model.addAttribute("task", taskService.findAll());
+        return "task/create";
+    }
+
+    @PostMapping("/create")
+    public String createNewTask(@ModelAttribute Task task, Model model) {
         try {
             taskService.save(task);
-            return "redirect:/task";
+            return "redirect:/task/list";
         } catch (Exception exception) {
             model.addAttribute("message", exception.getMessage());
             return "errors/404";

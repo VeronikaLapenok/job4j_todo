@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import ru.job4j.todo.model.Task;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -21,13 +20,6 @@ public class HibernateTaskRepository implements TaskRepository {
     @Autowired
     public HibernateTaskRepository(SessionFactory sf) {
         this.sf = sf;
-    }
-
-    private HibernateTaskRepository() {
-        save(new Task(0, "Task1", "Task1New", LocalDateTime.now(), true));
-        save(new Task(0, "Task2", "Task2New", LocalDateTime.now(), false));
-        save(new Task(0, "Task3", "Task3New", LocalDateTime.now(), true));
-        sf = null;
     }
 
     @Override
